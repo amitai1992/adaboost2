@@ -11,30 +11,30 @@ def main():
     points_circle = copy.deepcopy(points_rectangle)  # data set of circle
     print('-----------------rectangle----------------------')
     for r in range(1, 9):
-        sum_of_err_test_rect = 0  # sum of the errors on the train of rectangle
-        sum_of_err_train_rect = 0  # sum of the errors on the test of rectangle
+        sum_of_correct_ans_test_rect = 0  # sum of the correct answers on the train of rectangle
+        sum_of_correct_ans_train_rect = 0  # sum of the correct amswers on the test of rectangle
         for i in range(0, 100):
             random.shuffle(points_rectangle)  # shuffle the dataset
             H_rectangle_list = copy.deepcopy(adaboost(rectangle, points_rectangle, r))  # list of the rectagles from adaboost
-            sum_of_err_train_rect += test_adaboost(H_rectangle_list, points_rectangle[0:65], 'rectangle')  # test the train and add the errors to sum
-            sum_of_err_test_rect += test_adaboost(H_rectangle_list, points_rectangle[65: 130], 'rectangle')
-        sum_of_err_train_rect = sum_of_err_train_rect/100  # divide the sum_err in 100
-        sum_of_err_test_rect = sum_of_err_test_rect/100
-        print('round ' + str(r)+' train result = ' + str(sum_of_err_train_rect/65))  # divide the errors in 65 for precent
-        print('round ' + str(r)+' test result = ' + str(sum_of_err_test_rect/65))
+            sum_of_correct_ans_train_rect += test_adaboost(H_rectangle_list, points_rectangle[0:65], 'rectangle')  # test the train and add the errors to sum
+            sum_of_correct_ans_test_rect += test_adaboost(H_rectangle_list, points_rectangle[65: 130], 'rectangle')
+        sum_of_correct_ans_train_rect = sum_of_correct_ans_train_rect/100  # divide the sum_err in 100
+        sum_of_correct_ans_test_rect = sum_of_correct_ans_test_rect/100
+        print('round ' + str(r)+' train result = ' + str(sum_of_correct_ans_train_rect/65))  # divide the errors in 65 for precent
+        print('round ' + str(r)+' test result = ' + str(sum_of_correct_ans_test_rect/65))
         print('')
     print('------------------------circle---------------------')
     for r in range(1, 9):
-        sum_err_test = 0
-        sum_err_train = 0
+        sum_correct_ans_circ_test = 0
+        sum_correct_ans_circ_train = 0
         for i in range(0, 100):
             random.shuffle(points_circle)
             H_circle_list = list()
             H_circle_list = copy.deepcopy(adaboost(circle, points_circle, r))
-            sum_err_train += test_adaboost(H_circle_list, points_circle[0:65], 'circle')
-            sum_err_test += test_adaboost(H_circle_list, points_circle[65:130], 'circle')
-        print('round ' + str(r)+' train result = ' + str(sum_err_train/100))
-        print('round ' + str(r)+' test result = ' + str(sum_err_test/100))
+            sum_correct_ans_circ_train += test_adaboost(H_circle_list, points_circle[0:65], 'circle')
+            sum_correct_ans_circ_test += test_adaboost(H_circle_list, points_circle[65:130], 'circle')
+        print('round ' + str(r)+' train result = ' + str(sum_correct_ans_circ_train/100))
+        print('round ' + str(r)+' test result = ' + str(sum_correct_ans_circ_test/100))
         print('')
 
 
